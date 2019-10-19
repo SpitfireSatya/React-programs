@@ -2,15 +2,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const App = () => {
+class App extends React.Component {
 
-  window.navigator.geolocation.getCurrentPosition((pos) => {
-    console.log(pos);
-  }, (error) => {
-    console.log('User denied location', error)
-  });
+  constructor(props) {
+    
+    super(props)
+    
+    this.state = { lat: null };
 
-  return (<div>Hi There!</div>)
+    window.navigator.geolocation.getCurrentPosition((position) => {
+      this.setState({ lat: position.coords.latitude })
+    }, (error) => {
+      console.log('User denied location', error)
+    });
+
+  }
+
+  render() {
+    return (<div>Latitude: {this.state.lat}</div>)
+  }
+
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
