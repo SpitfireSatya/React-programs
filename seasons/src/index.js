@@ -4,19 +4,13 @@ import ReactDOM from 'react-dom';
 
 class App extends React.Component {
 
+  state = { lat: null, errorMessage: '' };
+
   constructor(props) {
     
     console.log('Constructor executed');
 
     super(props)
-    
-    this.state = { lat: null };
-
-    window.navigator.geolocation.getCurrentPosition((position) => {
-      this.setState({ lat: position.coords.latitude });
-    }, (error) => {
-      this.setState({ errorMessage: error.message });
-    });
 
   }
 
@@ -26,6 +20,11 @@ class App extends React.Component {
 
   componentDidMount() {
     console.log('Component did mount executed');
+    window.navigator.geolocation.getCurrentPosition((position) => {
+      this.setState({ lat: position.coords.latitude });
+    }, (error) => {
+      this.setState({ errorMessage: error.message });
+    });
   }
 
   componentDidUpdate() {
