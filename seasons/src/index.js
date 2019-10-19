@@ -11,15 +11,21 @@ class App extends React.Component {
     this.state = { lat: null };
 
     window.navigator.geolocation.getCurrentPosition((position) => {
-      this.setState({ lat: position.coords.latitude })
+      this.setState({ lat: position.coords.latitude });
     }, (error) => {
-      console.log('User denied location', error)
+      this.setState({ errorMessage: error.message });
     });
 
   }
 
   render() {
-    return (<div>Latitude: {this.state.lat}</div>)
+    if(this.state.errorMessage && !this.state.lat) {
+      return (<div>Error: {this.state.errorMessage}</div>);
+    } else if(!this.state.errorMessage && this.state.lat) {
+      return (<div>Latitude: {this.state.lat}</div>);
+    } else {
+      return (<div>Loading...</div>);
+    }
   }
 
 }
