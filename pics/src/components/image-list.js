@@ -11,8 +11,8 @@ class ImageList extends React.Component {
 
   render() {
 
-    const imageList = this.props.images.map(({description, id, urls}) => {
-      return <ImageCard description={description} key={id} url={urls.regular} />
+    const imageList = this.props.images.map((image) => {
+      return <ImageCard key={image.id} image={image} />
     });
 
     return (
