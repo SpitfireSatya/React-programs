@@ -10,12 +10,11 @@ class VideoList extends React.Component {
 
   render() {
     let videoList = this.props.videos.map((video) => {
-      return <VideoItem video={video} />
+      return <VideoItem key={video.etag} video={video} updateSelectedVideo={this.props.updateSelectedVideo} />
     });
 
     return (
-      <div>
-        video count: {this.props.videos.length}
+      <div className="ui relaxed divided list">
         {videoList}
       </div>
     );
